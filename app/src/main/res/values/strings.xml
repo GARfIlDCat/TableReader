@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">TableReader</string>
+    <string name="btn_file_browser">File Browser</string>
+</resources>
