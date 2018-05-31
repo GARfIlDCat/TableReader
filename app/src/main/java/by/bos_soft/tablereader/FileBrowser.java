@@ -2,6 +2,10 @@ package by.bos_soft.tablereader;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -11,13 +15,16 @@ import java.util.Map;
 
 public class FileBrowser extends AppCompatActivity {
 
+    private static final String LOG_TAG = "myLogs";
+
     // имена атрибутов для Map
     final String ATTRIBUTE_NAME_TEXT = "text";
     final String ATTRIBUTE_NAME_CHECKED = "checked";
     final String ATTRIBUTE_NAME_IMAGE = "image";
 
-    ListView lvSimple;
-
+    ListView lvFiles;
+    ArrayList<Map<String, Object>> data;
+    
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_browser);
@@ -27,8 +34,7 @@ public class FileBrowser extends AppCompatActivity {
                 ATTRIBUTE_NAME_IMAGE };
         // массив ID View-компонентов, в которые будут вставлять данные
         int[] to = { R.id.tvText, R.id.cbChecked, R.id.ivImg };
-
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>();
+        
         data = FillData();
 
         // создаем адаптер
@@ -36,8 +42,15 @@ public class FileBrowser extends AppCompatActivity {
                 from, to);
 
         // определяем список и присваиваем ему адаптер
-        lvSimple = (ListView) findViewById(R.id.lvFiles);
-        lvSimple.setAdapter(sAdapter);
+        lvFiles = (ListView) findViewById(R.id.lvFiles);
+        lvFiles.setAdapter(sAdapter);
+        lvFiles.setOnItemClickListener(new OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Log.d(LOG_TAG, "itemClick: position = " + position + ", id = "
+                        + id);
+            }
+        });
     }
 
     public ArrayList<Map<String, Object>> FillData() {
@@ -48,7 +61,7 @@ public class FileBrowser extends AppCompatActivity {
         int img = R.mipmap.ic_launcher;
 
         // упаковываем данные в понятную для адаптера структуру
-        ArrayList<Map<String, Object>> data = new ArrayList<Map<String, Object>>(texts.length);
+        data = new ArrayList<>(texts.length);
         Map<String, Object> m;
         for (int i = 0; i < texts.length; i++) {
             m = new HashMap<String, Object>();
