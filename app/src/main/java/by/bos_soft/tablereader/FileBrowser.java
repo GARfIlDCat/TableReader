@@ -43,8 +43,8 @@ public class FileBrowser extends AppCompatActivity {
     public ArrayList<Map<String, Object>> FillData() {
 // массивы данных
         String[] texts = { "sometext 1", "sometext 2", "sometext 3",
-                "sometext 4", "sometext 5", "some 6" };
-        boolean[] checked = { true, false, false, true, false, true };
+                "sometext 4", "sometext 5", "some 6", "sometext 5", "some 6" };
+        boolean[] checked = { true, false, false, true, false, true, false, true };
         int img = R.mipmap.ic_launcher;
 
         // упаковываем данные в понятную для адаптера структуру
