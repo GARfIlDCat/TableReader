@@ -18,12 +18,22 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
+
         <CheckBox
             android:id="@+id/cbChecked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="CheckBox">
-        </CheckBox>
+            android:gravity="top"
+            android:text="CheckBox" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="105dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:ems="10"
+            android:inputType="textEmailAddress" />
+
         <TextView
             android:id="@+id/tvText"
             android:layout_width="wrap_content"
@@ -32,5 +42,6 @@
             android:layout_marginRight="20dp"
             android:text="TextView">
         </TextView>
+
     </LinearLayout>
 </LinearLayout>
