@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 
-public class MainActivity extends AppCompatActivity implements FileBrowserFragment.OnFragmentInteractionListener {
+public class MainActivity extends AppCompatActivity {
 
     Button btnFileBrowser;
     FileBrowserFragment frFileBrowser;
@@ -32,8 +32,4 @@ public class MainActivity extends AppCompatActivity implements FileBrowserFragme
         fTrans.commit();
     }
 
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
 }
