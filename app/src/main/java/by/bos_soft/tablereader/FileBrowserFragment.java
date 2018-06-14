@@ -12,6 +12,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 public class FileBrowserFragment extends Fragment {
 
     // имена атрибутов для Map
@@ -20,7 +24,9 @@ public class FileBrowserFragment extends Fragment {
     final String ATTRIBUTE_IMAGE = "image";
     final String ATTRIBUTE_FILEINFO = "fileinfo";
 
-    ListView lvFile;
+    private Unbinder unbinder;
+
+    @BindView(R.id.lvFiles) ListView lvFile;
 
     /** Called when the activity is first created. */
     public void onCreate(Bundle savedInstanceState) {
@@ -32,6 +38,7 @@ public class FileBrowserFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_file_browser, null);
+        unbinder = ButterKnife.bind(this, v);
 
         // массивы данных
         String[] files = { "file 1", "file 2", "file 3", "file 4", "file 5", "file 6", "file 7",
@@ -67,11 +74,15 @@ public class FileBrowserFragment extends Fragment {
         SimpleAdapter sAdapter = new SimpleAdapter(getActivity(), data, R.layout.item_file_browser,
                 from, to);
 
-        // определяем список и присваиваем ему адаптер
-        lvFile = (ListView) v.findViewById(R.id.lvFiles);
+        // присваиваем списку адаптер
         lvFile.setAdapter(sAdapter);
 
         return v;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unbinder.unbind();
+    }
 }
