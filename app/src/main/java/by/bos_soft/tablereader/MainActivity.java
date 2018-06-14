@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
                 fTrans.add(R.id.frCont, frFileBrowser);
                 break;
         }
+        fTrans.addToBackStack(null);
         fTrans.commit();
     }
 
