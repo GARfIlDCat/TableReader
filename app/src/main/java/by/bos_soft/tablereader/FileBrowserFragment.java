@@ -40,6 +40,26 @@ public class FileBrowserFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_file_browser, null);
         unbinder = ButterKnife.bind(this, v);
 
+        ArrayList<Map<String, Object>> data;
+        data = FillData();
+
+        // массив имен атрибутов, из которых будут читаться данные
+        String[] from = {ATTRIBUTE_FILENAME, ATTRIBUTE_CHECKED,
+                ATTRIBUTE_IMAGE, ATTRIBUTE_FILEINFO};
+        // массив ID View-компонентов, в которые будут вставлять данные
+        int[] to = { R.id.cbFileName, R.id.cbFileName, R.id.ivFile, R.id.tvFileInfo };
+
+        // создаем адаптер
+        SimpleAdapter sAdapter = new SimpleAdapter(getActivity(), data, R.layout.item_file_browser,
+                from, to);
+
+        // присваиваем списку адаптер
+        lvFile.setAdapter(sAdapter);
+
+        return v;
+    }
+
+    public ArrayList<Map<String, Object>> FillData() {
         // массивы данных
         String[] files = { "file 1", "file 2", "file 3", "file 4", "file 5", "file 6", "file 7",
                 "file 8", "file 9", "file 10", "file 11", "file 12" };
@@ -63,21 +83,7 @@ public class FileBrowserFragment extends Fragment {
             m.put(ATTRIBUTE_IMAGE, img);
             data.add(m);
         }
-
-        // массив имен атрибутов, из которых будут читаться данные
-        String[] from = {ATTRIBUTE_FILENAME, ATTRIBUTE_CHECKED,
-                ATTRIBUTE_IMAGE, ATTRIBUTE_FILEINFO};
-        // массив ID View-компонентов, в которые будут вставлять данные
-        int[] to = { R.id.cbFileName, R.id.cbFileName, R.id.ivFile, R.id.tvFileInfo };
-
-        // создаем адаптер
-        SimpleAdapter sAdapter = new SimpleAdapter(getActivity(), data, R.layout.item_file_browser,
-                from, to);
-
-        // присваиваем списку адаптер
-        lvFile.setAdapter(sAdapter);
-
-        return v;
+        return data;
     }
 
     @Override
